@@ -1,0 +1,10 @@
+/boot_a         emmc      /dev/block/by-name/boot_a               flags=display="Boot A";backup=1;flashimg=1
+/boot_b         emmc      /dev/block/by-name/boot_b               flags=display="Boot B";backup=1;flashimg=1
+/dtbo_a         emmc      /dev/block/by-name/dtbo_a               flags=display="DTBO A";backup=1;flashimg=1
+/vbmeta_a       emmc      /dev/block/by-name/vbmeta_a             flags=display="VBMeta A";backup=1;flashimg=1
+/super          emmc      /dev/block/by-name/super                flags=display="Super Partition";backup=1
+/userdata       ext4      /dev/block/by-name/userdata             flags=display="Userdata"
+/protect1       ext4      /dev/block/by-name/protect1             flags=display="Protect1";backup=1
+/protect2       ext4      /dev/block/by-name/protect2             flags=display="Protect2";backup=1
+/nvdata         ext4      /dev/block/by-name/nvdata               flags=display="NVData";backup=1
+/nvram          emmc      /dev/block/by-name/nvram                flags=display="NVRAM";backup=1
