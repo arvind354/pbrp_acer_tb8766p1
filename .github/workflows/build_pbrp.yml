@@ -25,7 +25,7 @@ jobs:
 
     - name: Clone Device Tree
       run: |
-        git clone https://github.com/your-username/pbrp_acer_tb8766p1.git pbrp/device/acer/tb8766p1_64_bsp
+        git clone https://github.com/arvind354/pbrp_acer_tb8766p1.git pbrp/device/acer/tb8766p1_64_bsp
 
     - name: Build PitchBlack Image
       run: |
