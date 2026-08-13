@@ -1,1 +1,41 @@
 
+name: Build PitchBlack Recovery
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-20.04
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v3
+
+    - name: Set up Build Environment
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y bc bison build-essential ccache curl flex g++-multilib gcc-multilib git gnupg gperf imagenagick lib32ncurses5-dev lib32z1-dev libgl1-mesa-dev libxml2-utils xsltproc zip zlib1g-dev python3
+
+    - name: Initialize PBRP Source
+      run: |
+        mkdir pbrp && cd pbrp
+        repo init -u https://github.com/PitchBlackRecoveryProject/manifest_pb -b android-12.1 --depth=1
+        repo sync -c --no-clone-bundle --no-tags --optimized-fetch --prune -j$(nproc)
+
+    - name: Clone Device Tree
+      run: |
+        git clone https://github.com/your-username/pbrp_acer_tb8766p1.git pbrp/device/acer/tb8766p1_64_bsp
+
+    - name: Build PitchBlack Image
+      run: |
+        cd pbrp
+        source build/envsetup.sh
+        lunch pb_tb8766p1_64_bsp-eng
+        mka pbrp -j$(nproc)
+
+    - name: Upload PitchBlack Artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: PBRP-Acer-T4-82L
+        path: pbrp/out/target/product/tb8766p1_64_bsp/boot.img
